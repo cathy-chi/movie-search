@@ -1,0 +1,27 @@
+.App {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 45px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+  .Header {
+    flex: 0 1 100%;
+    padding-bottom: 2rem;
+    text-align: center;
+  }
+
+  .SearchBar {
+    flex: 0 1 100%;
+    padding-bottom: 2rem;
+    text-align: center;
+  }
+  
+  .CardGroup {
+    flex: 0 1 100%;
+  }
+
+  .Pagination {
+    padding-top: 2rem;
+  }
