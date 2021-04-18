@@ -55,6 +55,8 @@ class App extends Component {
     const shouldShowPagination =
       query && !loading && totalResults > results.length;
 
+    const shouldSayNoResults = results.length === 0 && query && !loading;
+
     return (
       <div className="App">
         <div className="Header">
@@ -71,7 +73,7 @@ class App extends Component {
             open={false}
           />
         </div>
-        {results.length === 0 && query && !loading ? (
+        {shouldSayNoResults ? (
           <div>
             <p>No results found</p>
           </div>
