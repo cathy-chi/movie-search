@@ -37,7 +37,6 @@ class App extends Component {
       .then((res) => {
         if ("error" in res) return this.setState({ loading: false });
         else {
-          console.log("hey", res);
           this.setSearchResultsState(res.data, page);
         }
       })
@@ -72,32 +71,40 @@ class App extends Component {
             open={false}
           />
         </div>
-        <div className="CardGroup">
-          <Card.Group centered>
-            {results.map((result, index) => (
-              <SearchCard
-                image={result.backdrop_path}
-                title={result.title}
-                key={index}
-                releaseDate={result.release_date}
-                overview={result.overview}
-                voteAverage={result.vote_average}
-                voteCount={result.vote_count}
-              ></SearchCard>
-            ))}
-          </Card.Group>
-        </div>
-        <div className="Pagination">
-          {shouldShowPagination ? (
-            <Pagination
-              totalPages={totalPages}
-              activePage={page}
-              onPageChange={(e, data) =>
-                this.searchMovies(query, data.activePage)
-              }
-            />
-          ) : null}
-        </div>
+        {results.length === 0 && query && !loading ? (
+          <div>
+            <p>No results found</p>
+          </div>
+        ) : (
+          <div>
+            <div className="CardGroup">
+              <Card.Group centered>
+                {results.map((result, index) => (
+                  <SearchCard
+                    image={result.backdrop_path}
+                    title={result.title}
+                    key={index}
+                    releaseDate={result.release_date}
+                    overview={result.overview}
+                    voteAverage={result.vote_average}
+                    voteCount={result.vote_count}
+                  ></SearchCard>
+                ))}
+              </Card.Group>
+            </div>
+            <div className="Pagination">
+              {shouldShowPagination ? (
+                <Pagination
+                  totalPages={totalPages}
+                  activePage={page}
+                  onPageChange={(e, data) =>
+                    this.searchMovies(query, data.activePage)
+                  }
+                />
+              ) : null}
+            </div>
+          </div>
+        )}
       </div>
     );
   }
